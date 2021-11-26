@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "description": "Физическое лицо",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Имя",
+      "maxLength": 255,
+      "pattern": "^[A-Z]+*[a-z]$"
+    },
+    "surname": {
+      "type": "string",
+      "description": "Фамилия",
+      "maxLength": 255,
+      "pattern": "^[A-Z]+*[a-z]$"
+    },
+    "middleName": {
+      "type": "string",
+      "description": "Отчество",
+      "maxLength": 255,
+      "pattern": "^[A-Z]+*[a-z]$"
+    },
+    "address": {
+      "$ref": "#/definitions/address_type"
+    }
+  },
+  "required": [
+    "name",
+    "surname"
+  ],
+  "definitions": {
+    "address_type": {
+      "type": "object",
+      "description": "Адрес клиента",
+      "additionalProperties":false,
+      "properties": {
+        "country": {
+          "type": "string",
+          "description": "Страна",
+          "enum": ["Россия","Украина","Белорусь"]
+        },
+        "city": {
+          "type": "string",
+          "description": "Город"
+        },
+        "addressLine": {"type": "string","description": "адресная строка"}
+      }
+    }
+  }
+}
