@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "description": "редактирование бюджета.Ответ",
+  "additionalProperties": false,
+  "properties": {
+    "success": {
+      "type": "boolean",
+      "description": "Успешность выполнения запроса"
+    },
+    "body": {
+      "$ref": "#/definitions/body_type"
+    }
+  },
+  "required": [
+    "body"
+  ],
+  "definitions": {
+    "income_type": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "amount": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "Сумма"
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "RUB",
+              "USD",
+              "EUR"
+            ],
+            "description": "Буквенный код ISO"
+          }
+        },
+        "required": [
+          "amount",
+          "currency"
+        ]
+      }
+    },
+    "body_type": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "income": {
+          "$ref": "#/definitions/income_type",
+          "description": "Ежемесячный доход клиента"
+        },
+        "expense": {
+          "$ref": "#/definitions/income_type",
+          "description": "Ежемесячный расход клиента"
+        },
+        "savings": {
+          "$ref": "#/definitions/income_type",
+          "description": "Сколько клиент готов откладывать"
+        }
+      }
+    }
+  }
+}
